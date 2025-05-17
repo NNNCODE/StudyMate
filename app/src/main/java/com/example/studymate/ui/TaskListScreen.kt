@@ -11,17 +11,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.studymate.data.Task
 
+
 @Composable
 fun TaskListScreen(
     tasks: List<Task>,
-    onDeleteTask: (Task) -> Unit
+    onDeleteTask: (Task) -> Unit,
+    onAddTask: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(
-            text = "📚 我的任务",
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "📚 我的任务",
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Button(onClick = onAddTask) {
+                Text("添加任务")
+            }
+        }
 
         LazyColumn {
             items(tasks) { task ->
